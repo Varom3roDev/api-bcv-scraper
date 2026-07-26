@@ -1,0 +1,30 @@
+name: BCV Scraper
+
+on:
+  schedule:
+    # Corre todos los días hábiles a las 14:00 y 21:00 UTC (10:00 AM y 5:00 PM HLV)
+    - cron: '0 14 * * 1-5'
+    - cron: '0 21 * * 1-5'
+  workflow_dispatch: # Permite ejecución manual
+
+jobs:
+  scrape-and-save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar Scraper
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scraper.py
