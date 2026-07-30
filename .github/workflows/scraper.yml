@@ -2,15 +2,20 @@ name: BCV Scraper
 
 on:
   schedule:
-    # Corre todos los días hábiles (Lunes a Viernes) en UTC
-    # 01:00 AM HLV -> 05:00 UTC
-    - cron: '0 5 * * 1-5'
     # 05:00 AM HLV -> 09:00 UTC
     - cron: '0 9 * * 1-5'
-    # 08:00 AM HLV -> 12:00 UTC
-    - cron: '0 12 * * 1-5'
+    # 04:30 PM HLV -> 20:30 UTC
+    - cron: '30 20 * * 1-5'
+    # 05:00 PM HLV -> 21:00 UTC
+    - cron: '0 21 * * 1-5'
     # 05:30 PM HLV -> 21:30 UTC
     - cron: '30 21 * * 1-5'
+    # 06:00 PM HLV -> 22:00 UTC
+    - cron: '0 22 * * 1-5'
+    # 06:30 PM HLV -> 22:30 UTC
+    - cron: '30 22 * * 1-5'
+    # 07:00 PM HLV -> 23:00 UTC
+    - cron: '0 23 * * 1-5'
   workflow_dispatch: # Permite ejecución manual
 
 jobs:
