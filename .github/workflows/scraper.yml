@@ -23,6 +23,8 @@ on:
 jobs:
   scrape-and-save:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
@@ -41,3 +43,8 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python scraper.py
+
+      - name: Mantener activo el cron job (Keep-Alive)
+        uses: gautamkrishnar/keepalive-workflow@v1
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
